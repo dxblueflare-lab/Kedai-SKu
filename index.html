@@ -14,19 +14,29 @@
         }
 
         :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --accent: #FFE66D;
-            --dark: #2C3E50;
-            --light: #F8F9FA;
-            --gradient: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            --forest-dark: #1B4332;
+            --forest-primary: #2D6A4F;
+            --forest-light: #40916C;
+            --leaf-bright: #52B788;
+            --leaf-pale: #74C69D;
+            --sage: #95D5B2;
+            --mint: #B7E4C7;
+            --cream: #D8F3DC;
+            --cream-light: #F1F8F4;
+            --earth-brown: #8B5A2B;
+            --earth-light: #D4A373;
+            --warm-white: #FEFAE0;
+            --dark-text: #1A1A1A;
+            --gradient-leaf: linear-gradient(135deg, #2D6A4F 0%, #40916C 50%, #52B788 100%);
+            --gradient-forest: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            color: var(--dark);
+            color: var(--dark-text);
             line-height: 1.6;
             overflow-x: hidden;
+            background-color: var(--cream-light);
         }
 
         /* Navigation */
@@ -45,7 +55,7 @@
 
         nav.scrolled {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(45, 106, 79, 0.15);
             padding: 1rem 5%;
         }
 
@@ -53,8 +63,15 @@
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--forest-primary);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--leaf-bright);
         }
 
         .nav-links {
@@ -65,9 +82,9 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--dark);
+            color: var(--forest-dark);
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
         }
 
@@ -78,7 +95,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary);
+            background: var(--forest-primary);
             transition: width 0.3s ease;
         }
 
@@ -87,13 +104,14 @@
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--forest-primary);
         }
 
         .mobile-menu {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--forest-dark);
         }
 
         /* Hero Section */
@@ -102,54 +120,117 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(184, 241, 201, 0.3) 0%, rgba(216, 243, 220, 0.5) 50%, rgba(241, 248, 244, 0.8) 100%);
             position: relative;
             padding: 100px 5%;
+            overflow: hidden;
+        }
+
+        /* Animated Leaf Background */
+        .leaves-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--leaf-pale);
+            border-radius: 0 50% 0 50%;
+            opacity: 0.15;
+            animation: float-leaf 15s ease-in-out infinite;
+        }
+
+        .leaf:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; transform: rotate(45deg); }
+        .leaf:nth-child(2) { top: 20%; left: 80%; animation-delay: 2s; transform: rotate(120deg); background: var(--sage); }
+        .leaf:nth-child(3) { top: 60%; left: 15%; animation-delay: 4s; transform: rotate(200deg); background: var(--forest-light); }
+        .leaf:nth-child(4) { top: 40%; left: 70%; animation-delay: 6s; transform: rotate(300deg); background: var(--leaf-bright); }
+        .leaf:nth-child(5) { top: 80%; left: 50%; animation-delay: 8s; transform: rotate(60deg); background: var(--mint); }
+        .leaf:nth-child(6) { top: 30%; left: 40%; animation-delay: 10s; transform: rotate(150deg); background: var(--forest-primary); }
+        .leaf:nth-child(7) { top: 70%; left: 85%; animation-delay: 12s; transform: rotate(240deg); background: var(--sage); }
+        .leaf:nth-child(8) { top: 15%; left: 60%; animation-delay: 14s; transform: rotate(330deg); background: var(--leaf-pale); }
+
+        @keyframes float-leaf {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+                opacity: 0.15;
+            }
+            25% { 
+                transform: translateY(-30px) rotate(90deg); 
+                opacity: 0.25;
+            }
+            50% { 
+                transform: translateY(-60px) rotate(180deg); 
+                opacity: 0.15;
+            }
+            75% { 
+                transform: translateY(-30px) rotate(270deg); 
+                opacity: 0.25;
+            }
         }
 
         .hero-content {
             text-align: center;
             max-width: 900px;
             z-index: 1;
+            position: relative;
         }
 
         .hero-badge {
-            display: inline-block;
-            background: var(--accent);
-            padding: 0.5rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--cream);
+            color: var(--forest-dark);
+            padding: 0.75rem 2rem;
             border-radius: 50px;
             font-weight: 500;
             margin-bottom: 1.5rem;
             animation: fadeInDown 0.8s ease;
+            border: 2px solid var(--sage);
+            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.1);
+        }
+
+        .hero-badge i {
+            color: var(--leaf-bright);
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 4.5rem;
             margin-bottom: 1rem;
-            background: var(--gradient);
+            background: var(--gradient-forest);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: fadeInUp 0.8s ease;
+            text-shadow: 0 4px 20px rgba(45, 106, 79, 0.1);
         }
 
         .tagline {
             font-size: 1.5rem;
-            color: #666;
+            color: var(--forest-primary);
             margin-bottom: 2rem;
             font-style: italic;
             animation: fadeInUp 0.8s ease 0.2s backwards;
+            font-weight: 500;
         }
 
         .hero-description {
             font-size: 1.1rem;
-            color: #555;
+            color: var(--forest-dark);
             margin-bottom: 2.5rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 0.8s ease 0.4s backwards;
+            opacity: 0.9;
         }
 
         .hero-buttons {
@@ -169,78 +250,31 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-primary {
-            background: var(--gradient);
+            background: var(--gradient-leaf);
             color: white;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 10px 30px rgba(45, 106, 79, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 15px 40px rgba(45, 106, 79, 0.4);
         }
 
         .btn-secondary {
             background: white;
-            color: var(--dark);
-            border: 2px solid var(--dark);
+            color: var(--forest-dark);
+            border: 2px solid var(--forest-primary);
         }
 
         .btn-secondary:hover {
-            background: var(--dark);
+            background: var(--forest-primary);
             color: white;
-        }
-
-        /* Floating Elements */
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            top: 10%;
-            left: -5%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            background: var(--secondary);
-            bottom: 20%;
-            right: -3%;
-            animation-delay: 2s;
-        }
-
-        .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            background: var(--accent);
-            top: 50%;
-            right: 10%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
+            transform: translateY(-3px);
         }
 
         @keyframes fadeInUp {
@@ -269,11 +303,26 @@
         .about {
             padding: 100px 5%;
             background: white;
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z' fill='%2340916c' fill-opacity='0.03'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            pointer-events: none;
         }
 
         .section-container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .section-header {
@@ -282,17 +331,39 @@
         }
 
         .section-subtitle {
-            color: var(--primary);
+            color: var(--forest-primary);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .section-subtitle i {
+            color: var(--leaf-bright);
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
-            color: var(--dark);
+            color: var(--forest-dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-leaf);
+            border-radius: 2px;
         }
 
         .about-grid {
@@ -309,7 +380,8 @@
         .about-image img {
             width: 100%;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 60px rgba(27, 67, 50, 0.2);
+            border: 4px solid white;
         }
 
         .about-image::before {
@@ -319,21 +391,24 @@
             left: -20px;
             width: 100%;
             height: 100%;
-            border: 3px solid var(--primary);
+            border: 3px solid var(--leaf-bright);
             border-radius: 20px;
             z-index: -1;
+            background: var(--cream);
         }
 
         .about-content h3 {
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: var(--forest-dark);
+            font-family: 'Playfair Display', serif;
         }
 
         .about-content p {
-            color: #666;
+            color: var(--forest-dark);
             margin-bottom: 1.5rem;
             font-size: 1.05rem;
+            opacity: 0.85;
         }
 
         .features {
@@ -347,53 +422,98 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            padding: 1rem;
+            background: var(--cream-light);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(45, 106, 79, 0.1);
         }
 
         .feature-icon {
             width: 50px;
             height: 50px;
-            background: var(--gradient);
+            background: var(--gradient-leaf);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         /* Menu Section */
         .menu {
             padding: 100px 5%;
-            background: linear-gradient(135deg, #FFF5F5 0%, #F0FFFE 100%);
+            background: linear-gradient(135deg, #F1F8F4 0%, #E8F5E9 100%);
+            position: relative;
+        }
+
+        .menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(82, 183, 136, 0.1) 0%, transparent 20%),
+                        radial-gradient(circle at 90% 80%, rgba(45, 106, 79, 0.1) 0%, transparent 20%);
+            pointer-events: none;
         }
 
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .menu-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 40px rgba(27, 67, 50, 0.08);
             transition: all 0.3s ease;
+            border: 1px solid rgba(45, 106, 79, 0.1);
         }
 
         .menu-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 60px rgba(27, 67, 50, 0.15);
+            border-color: var(--leaf-bright);
         }
 
         .menu-image {
             height: 200px;
-            background: var(--gradient);
+            background: var(--gradient-leaf);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, 10px) rotate(180deg); }
         }
 
         .menu-info {
@@ -403,12 +523,15 @@
         .menu-info h3 {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
+            color: var(--forest-dark);
+            font-family: 'Playfair Display', serif;
         }
 
         .menu-info p {
-            color: #666;
+            color: var(--forest-dark);
             font-size: 0.95rem;
             margin-bottom: 1rem;
+            opacity: 0.75;
         }
 
         .menu-footer {
@@ -420,12 +543,12 @@
         .price {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--forest-primary);
         }
 
         .order-btn {
             padding: 0.5rem 1.5rem;
-            background: var(--gradient);
+            background: var(--gradient-leaf);
             color: white;
             border: none;
             border-radius: 25px;
@@ -436,32 +559,54 @@
 
         .order-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(45, 106, 79, 0.3);
         }
 
         /* Testimonials */
         .testimonials {
             padding: 100px 5%;
             background: white;
+            position: relative;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50 Q30 30 50 10 Q70 30 50 50' fill='%2340916c' fill-opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
         }
 
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .testimonial-card {
-            background: var(--light);
+            background: var(--cream-light);
             padding: 2.5rem;
             border-radius: 20px;
             position: relative;
+            border: 1px solid rgba(45, 106, 79, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(27, 67, 50, 0.1);
         }
 
         .testimonial-card::before {
             content: '"';
             font-family: 'Playfair Display', serif;
             font-size: 8rem;
-            color: var(--primary);
+            color: var(--leaf-bright);
             opacity: 0.2;
             position: absolute;
             top: -20px;
@@ -476,9 +621,10 @@
 
         .testimonial-text {
             font-size: 1.1rem;
-            color: #555;
+            color: var(--forest-dark);
             margin-bottom: 1.5rem;
             font-style: italic;
+            opacity: 0.85;
         }
 
         .testimonial-author {
@@ -490,7 +636,7 @@
         .author-avatar {
             width: 50px;
             height: 50px;
-            background: var(--gradient);
+            background: var(--gradient-leaf);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -498,36 +644,54 @@
             color: white;
             font-weight: 700;
             font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.2);
         }
 
         .author-info h4 {
             font-size: 1rem;
-            color: var(--dark);
+            color: var(--forest-dark);
         }
 
         .author-info p {
             font-size: 0.85rem;
-            color: #888;
+            color: var(--forest-primary);
         }
 
         .stars {
-            color: var(--accent);
+            color: var(--earth-light);
             margin-bottom: 1rem;
         }
 
         /* Contact Section */
         .contact {
             padding: 100px 5%;
-            background: var(--dark);
+            background: var(--gradient-forest);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 40 Q20 20 40 0 Q60 20 40 40' fill='%2352B788' fill-opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
         }
 
         .contact .section-subtitle {
-            color: var(--secondary);
+            color: var(--sage);
         }
 
         .contact .section-title {
             color: white;
+        }
+
+        .contact .section-title::after {
+            background: var(--sage);
         }
 
         .contact-grid {
@@ -535,10 +699,23 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
             margin-top: 3rem;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-item {
             text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .contact-icon {
@@ -551,16 +728,26 @@
             justify-content: center;
             margin: 0 auto 1.5rem;
             font-size: 2rem;
-            color: var(--secondary);
+            color: var(--sage);
+            border: 2px solid rgba(149, 213, 178, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--sage);
+            color: var(--forest-dark);
+            transform: rotate(360deg);
         }
 
         .contact-item h4 {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            color: white;
         }
 
         .contact-item p {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
         }
 
         .social-links {
@@ -568,6 +755,8 @@
             justify-content: center;
             gap: 1rem;
             margin-top: 3rem;
+            position: relative;
+            z-index: 1;
         }
 
         .social-link {
@@ -582,23 +771,42 @@
             font-size: 1.2rem;
             transition: all 0.3s ease;
             text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .social-link:hover {
-            background: var(--primary);
+            background: var(--sage);
+            color: var(--forest-dark);
             transform: translateY(-5px);
+            border-color: var(--sage);
         }
 
         /* Footer */
         footer {
-            background: #1a252f;
+            background: var(--forest-dark);
             color: rgba(255, 255, 255, 0.7);
             text-align: center;
             padding: 2rem 5%;
+            border-top: 1px solid rgba(82, 183, 136, 0.2);
         }
 
         footer p {
             font-size: 0.9rem;
+        }
+
+        footer i {
+            color: var(--leaf-bright);
+        }
+
+        /* Decorative Elements */
+        .leaf-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--leaf-pale);
+            border-radius: 0 50% 0 50%;
+            opacity: 0.1;
+            pointer-events: none;
         }
 
         /* Responsive */
@@ -613,7 +821,7 @@
                 flex-direction: column;
                 padding: 2rem;
                 gap: 1.5rem;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 30px rgba(27, 67, 50, 0.1);
             }
 
             .nav-links.active {
@@ -647,13 +855,39 @@
             .testimonial-grid {
                 grid-template-columns: 1fr;
             }
+
+            .leaf {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-leaf);
+            border-radius: 6px;
+            border: 3px solid var(--cream-light);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--forest-primary);
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav id="navbar">
-        <a href="#" class="logo">Kedai S'Ku</a>
+        <a href="#" class="logo">
+            <i class="fas fa-leaf"></i> Kedai S'Ku
+        </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home">Beranda</a></li>
             <li><a href="#about">Tentang</a></li>
@@ -668,17 +902,24 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
+        <div class="leaves-container">
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
         </div>
         <div class="hero-content">
-            <div class="hero-badge">✨ Selamat Datang</div>
+            <div class="hero-badge">
+                <i class="fas fa-seedling"></i> Selamat Datang
+            </div>
             <h1>Kedai S'Ku</h1>
             <p class="tagline">"Rasa Autentik, Kenangan di Setiap Suapan"</p>
             <p class="hero-description">
-                Temukan kelezatan hidangan tradisional dengan sentuhan modern. 
+                Temukan kelezatan hidangan tradisional dengan sentuhan modern di tengah nuansa alam yang menyegarkan. 
                 Setiap resep dibuat dengan cinta dan bahan-bahan pilihan terbaik untuk pengalaman kuliner yang tak terlupakan.
             </p>
             <div class="hero-buttons">
@@ -696,7 +937,9 @@
     <section class="about" id="about">
         <div class="section-container">
             <div class="section-header">
-                <p class="section-subtitle">Cerita Kami</p>
+                <p class="section-subtitle">
+                    <i class="fas fa-leaf"></i> Cerita Kami
+                </p>
                 <h2 class="section-title">Tentang Kedai S'Ku</h2>
             </div>
             <div class="about-grid">
@@ -707,12 +950,12 @@
                     <h3>Warisan Rasa yang Terus Dijaga</h3>
                     <p>
                         Kedai S'Ku didirikan dengan passion untuk menghadirkan cita rasa autentik Nusantara 
-                        dalam suasana yang nyaman dan modern. Kami percaya bahwa makanan bukan sekadar 
-                        kebutuhan, tetapi sebuah pengalaman yang menyentuh hati.
+                        dalam suasana yang nyaman dan alami. Seperti dedaunan yang selalu hijau, kami percaya 
+                        bahwa makanan bukan sekadar kebutuhan, tetapi sebuah pengalaman yang menyentuh hati.
                     </p>
                     <p>
                         Setiap hidangan kami disiapkan oleh chef berpengalaman dengan bahan-bahan segar 
-                        pilihan, memastikan setiap suapan memberikan kenikmatan yang konsisten.
+                        pilihan, memastikan setiap suapan memberikan kenikmatan yang konsisten dan menyehatkan.
                     </p>
                     <div class="features">
                         <div class="feature">
@@ -720,8 +963,8 @@
                                 <i class="fas fa-leaf"></i>
                             </div>
                             <div>
-                                <strong>Bahan Segar</strong>
-                                <p style="font-size: 0.85rem; margin: 0;">Dipilih setiap hari</p>
+                                <strong>Bahan Organik</strong>
+                                <p style="font-size: 0.85rem; margin: 0; color: var(--forest-primary);">Dipetik dari alam</p>
                             </div>
                         </div>
                         <div class="feature">
@@ -730,16 +973,16 @@
                             </div>
                             <div>
                                 <strong>Dibuat dengan Cinta</strong>
-                                <p style="font-size: 0.85rem; margin: 0;">Resep tradisional</p>
+                                <p style="font-size: 0.85rem; margin: 0; color: var(--forest-primary);">Resep tradisional</p>
                             </div>
                         </div>
                         <div class="feature">
                             <div class="feature-icon">
-                                <i class="fas fa-medal"></i>
+                                <i class="fas fa-seedling"></i>
                             </div>
                             <div>
-                                <strong>Kualitas Terbaik</strong>
-                                <p style="font-size: 0.85rem; margin: 0;">Standar tinggi</p>
+                                <strong>Ramah Lingkungan</strong>
+                                <p style="font-size: 0.85rem; margin: 0; color: var(--forest-primary);">Packaging sustainable</p>
                             </div>
                         </div>
                         <div class="feature">
@@ -748,7 +991,7 @@
                             </div>
                             <div>
                                 <strong>Pelayanan Hangat</strong>
-                                <p style="font-size: 0.85rem; margin: 0;">Seperti keluarga</p>
+                                <p style="font-size: 0.85rem; margin: 0; color: var(--forest-primary);">Seperti keluarga</p>
                             </div>
                         </div>
                     </div>
@@ -761,7 +1004,9 @@
     <section class="menu" id="menu">
         <div class="section-container">
             <div class="section-header">
-                <p class="section-subtitle">Hidangan Kami</p>
+                <p class="section-subtitle">
+                    <i class="fas fa-leaf"></i> Hidangan Kami
+                </p>
                 <h2 class="section-title">Menu Favorit</h2>
             </div>
             <div class="menu-grid">
@@ -839,7 +1084,9 @@
     <section class="testimonials" id="testimonials">
         <div class="section-container">
             <div class="section-header">
-                <p class="section-subtitle">Kata Mereka</p>
+                <p class="section-subtitle">
+                    <i class="fas fa-leaf"></i> Kata Mereka
+                </p>
                 <h2 class="section-title">Testimoni Pelanggan</h2>
             </div>
             <div class="testimonial-grid">
@@ -854,7 +1101,7 @@
                         </div>
                         <p class="testimonial-text">
                             "Rasa makanannya benar-benar autentik! Mengingatkan saya pada masakan ibu di kampung. 
-                            Pelayanan juga sangat ramah dan tempatnya nyaman."
+                            Suasana kedai yang hijau dan asri membuat makan terasa lebih nikmat."
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">A</div>
@@ -876,7 +1123,7 @@
                         </div>
                         <p class="testimonial-text">
                             "Tempat favorit saya untuk makan siang. Harganya terjangkau, porsinya cukup, 
-                            dan yang paling penting rasanya selalu konsisten enak!"
+                            dan yang paling penting rasanya selalu konsisten enak! Nuansa alamnya bikin relax."
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">S</div>
@@ -898,7 +1145,7 @@
                         </div>
                         <p class="testimonial-text">
                             "Sate Ayam Maduranya juara! Bumbu kacangnya kental dan gurih. 
-                            Pasti akan kembali lagi untuk mencoba menu lainnya."
+                            Ditambah suasana kedai yang hijau dan nyaman, pasti akan kembali lagi."
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">B</div>
@@ -917,7 +1164,9 @@
     <section class="contact" id="contact">
         <div class="section-container">
             <div class="section-header">
-                <p class="section-subtitle">Hubungi Kami</p>
+                <p class="section-subtitle">
+                    <i class="fas fa-leaf"></i> Hubungi Kami
+                </p>
                 <h2 class="section-title">Kunjungi Kedai S'Ku</h2>
             </div>
             <div class="contact-grid">
@@ -954,7 +1203,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Kedai S'Ku. All Rights Reserved. | Dibuat dengan ❤️ untuk pecinta kuliner</p>
+        <p>&copy; 2026 Kedai S'Ku. All Rights Reserved. | Dibuat dengan <i class="fas fa-leaf"></i> untuk pecinta kuliner</p>
     </footer>
 
     <script>
@@ -1015,11 +1264,21 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.menu-card, .testimonial-card, .feature').forEach(el => {
+        document.querySelectorAll('.menu-card, .testimonial-card, .feature, .contact-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
+        });
+
+        // Parallax effect for leaves
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const leaves = document.querySelectorAll('.leaf');
+            leaves.forEach((leaf, index) => {
+                const speed = 0.5 + (index * 0.1);
+                leaf.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
         });
     </script>
 </body>
