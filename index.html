@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kedai S'Ku - Rasa yang Menggugah Selera</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>S'Ku - Authentic Tea Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,29 +14,50 @@
         }
 
         :root {
-            --forest-dark: #1B4332;
-            --forest-primary: #2D6A4F;
-            --forest-light: #40916C;
-            --leaf-bright: #52B788;
-            --leaf-pale: #74C69D;
-            --sage: #95D5B2;
-            --mint: #B7E4C7;
-            --cream: #D8F3DC;
-            --cream-light: #F1F8F4;
-            --earth-brown: #8B5A2B;
-            --earth-light: #D4A373;
-            --warm-white: #FEFAE0;
-            --dark-text: #1A1A1A;
-            --gradient-leaf: linear-gradient(135deg, #2D6A4F 0%, #40916C 50%, #52B788 100%);
-            --gradient-forest: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+            --primary-green: #2d5016;
+            --light-green: #4a7c29;
+            --tea-green: #8fbc8f;
+            --cream: #f5f5dc;
+            --gold: #d4af37;
+            --dark: #1a1a1a;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            color: var(--dark-text);
-            line-height: 1.6;
+            background-color: #fafaf5;
+            color: var(--dark);
             overflow-x: hidden;
-            background-color: var(--cream-light);
+        }
+
+        /* Animated Leaf Background */
+        .leaf {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c29' opacity='0.1'%3E%3Cpath d='M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.22,6.22,0,0,0,1.75,3.75C7,8,17,8,17,8Z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* Navigation */
@@ -44,7 +65,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 5%;
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -54,38 +75,41 @@
         }
 
         nav.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 30px rgba(45, 106, 79, 0.15);
-            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 15px 50px;
         }
 
         .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
         }
 
-        .logo img {
-            height: 50px;
-            width: 50px;
-            object-fit: cover;
-            border-radius: 50%;
-            background: transparent;
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--light-green);
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 40px;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--forest-dark);
+            color: var(--dark);
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
             position: relative;
+            transition: color 0.3s ease;
         }
 
         .nav-links a::after {
@@ -95,7 +119,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--forest-primary);
+            background: var(--light-green);
             transition: width 0.3s ease;
         }
 
@@ -103,176 +127,123 @@
             width: 100%;
         }
 
-        .nav-links a:hover {
-            color: var(--forest-primary);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--forest-dark);
-        }
-
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(184, 241, 201, 0.3) 0%, rgba(216, 243, 220, 0.5) 50%, rgba(241, 248, 244, 0.8) 100%);
             position: relative;
-            padding: 100px 5%;
+            background: linear-gradient(135deg, #f5f5dc 0%, #e8f5e9 50%, #d4e7d4 100%);
             overflow: hidden;
         }
 
-        /* Animated Leaf Background */
-        .leaves-container {
+        .hero::before {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            pointer-events: none;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(74, 124, 41, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
         }
 
-        .leaf {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: var(--leaf-pale);
-            border-radius: 0 50% 0 50%;
-            opacity: 0.15;
-            animation: float-leaf 15s ease-in-out infinite;
-        }
-
-        .leaf:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; transform: rotate(45deg); }
-        .leaf:nth-child(2) { top: 20%; left: 80%; animation-delay: 2s; transform: rotate(120deg); background: var(--sage); }
-        .leaf:nth-child(3) { top: 60%; left: 15%; animation-delay: 4s; transform: rotate(200deg); background: var(--forest-light); }
-        .leaf:nth-child(4) { top: 40%; left: 70%; animation-delay: 6s; transform: rotate(300deg); background: var(--leaf-bright); }
-        .leaf:nth-child(5) { top: 80%; left: 50%; animation-delay: 8s; transform: rotate(60deg); background: var(--mint); }
-        .leaf:nth-child(6) { top: 30%; left: 40%; animation-delay: 10s; transform: rotate(150deg); background: var(--forest-primary); }
-        .leaf:nth-child(7) { top: 70%; left: 85%; animation-delay: 12s; transform: rotate(240deg); background: var(--sage); }
-        .leaf:nth-child(8) { top: 15%; left: 60%; animation-delay: 14s; transform: rotate(330deg); background: var(--leaf-pale); }
-
-        @keyframes float-leaf {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg); 
-                opacity: 0.15;
-            }
-            25% { 
-                transform: translateY(-30px) rotate(90deg); 
-                opacity: 0.25;
-            }
-            50% { 
-                transform: translateY(-60px) rotate(180deg); 
-                opacity: 0.15;
-            }
-            75% { 
-                transform: translateY(-30px) rotate(270deg); 
-                opacity: 0.25;
-            }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
 
         .hero-content {
             text-align: center;
+            z-index: 10;
             max-width: 900px;
-            z-index: 1;
-            position: relative;
+            padding: 0 20px;
         }
 
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--cream);
-            color: var(--forest-dark);
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-            animation: fadeInDown 0.8s ease;
-            border: 2px solid var(--sage);
-            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.1);
-        }
-
-        .hero-badge i {
-            color: var(--leaf-bright);
+            display: inline-block;
+            background: var(--primary-green);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInUp 1s ease;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            margin-bottom: 1rem;
-            background: var(--gradient-forest);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 0.8s ease;
-            text-shadow: 0 4px 20px rgba(45, 106, 79, 0.1);
+            font-size: 5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+            font-style: italic;
         }
 
         .tagline {
             font-size: 1.5rem;
-            color: var(--forest-primary);
-            margin-bottom: 2rem;
-            font-style: italic;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
+            color: var(--light-green);
+            margin-bottom: 40px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .tagline-highlight {
+            background: linear-gradient(120deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.3) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+            padding: 0 10px;
             font-weight: 500;
         }
 
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--forest-dark);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 0.8s ease 0.4s backwards;
-            opacity: 0.9;
-        }
-
-        .hero-buttons {
+        .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 20px;
             justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.6s backwards;
+            animation: fadeInUp 1s ease 0.6s both;
         }
 
         .btn {
-            padding: 1rem 2.5rem;
+            padding: 15px 40px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            border: none;
-            cursor: pointer;
+            gap: 10px;
         }
 
         .btn-primary {
-            background: var(--gradient-leaf);
+            background: var(--primary-green);
             color: white;
-            box-shadow: 0 10px 30px rgba(45, 106, 79, 0.3);
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(45, 106, 79, 0.4);
+            box-shadow: 0 15px 40px rgba(45, 80, 22, 0.4);
+            background: var(--light-green);
         }
 
         .btn-secondary {
-            background: white;
-            color: var(--forest-dark);
-            border: 2px solid var(--forest-primary);
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
         }
 
         .btn-secondary:hover {
-            background: var(--forest-primary);
+            background: var(--primary-green);
             color: white;
             transform: translateY(-3px);
         }
@@ -288,88 +259,19 @@
             }
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* About Section */
         .about {
-            padding: 100px 5%;
+            padding: 100px 50px;
             background: white;
             position: relative;
         }
 
-        .about::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z' fill='%2340916c' fill-opacity='0.03'/%3E%3C/svg%3E");
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .section-container {
+        .about-container {
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-subtitle {
-            color: var(--forest-primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .section-subtitle i {
-            color: var(--leaf-bright);
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: var(--forest-dark);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--gradient-leaf);
-            border-radius: 2px;
-        }
-
-        .about-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
             align-items: center;
         }
 
@@ -377,295 +279,232 @@
             position: relative;
         }
 
-        .about-image img {
+        .about-image-main {
             width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(27, 67, 50, 0.2);
-            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: var(--light-green);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
 
-        .about-image::before {
-            content: '';
+        .floating-card {
             position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 100%;
-            height: 100%;
-            border: 3px solid var(--leaf-bright);
-            border-radius: 20px;
-            z-index: -1;
-            background: var(--cream);
+            bottom: -30px;
+            right: -30px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: float 3s ease-in-out infinite;
         }
 
-        .about-content h3 {
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-card i {
             font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--forest-dark);
+            color: var(--light-green);
+        }
+
+        .floating-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .floating-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .about-content h2 {
             font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
 
         .about-content p {
-            color: var(--forest-dark);
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-            opacity: 0.85;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
         }
 
         .features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 20px;
+            margin-top: 30px;
         }
 
-        .feature {
+        .feature-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--cream-light);
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            gap: 15px;
         }
 
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(45, 106, 79, 0.1);
-        }
-
-        .feature-icon {
+        .feature-item i {
             width: 50px;
             height: 50px;
-            background: var(--gradient-leaf);
-            border-radius: 12px;
+            background: rgba(74, 124, 41, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--light-green);
             font-size: 1.2rem;
-            flex-shrink: 0;
         }
 
         /* Menu Section */
         .menu {
-            padding: 100px 5%;
-            background: linear-gradient(135deg, #F1F8F4 0%, #E8F5E9 100%);
+            padding: 100px 50px;
+            background: linear-gradient(to bottom, #fafaf5, #f0f7f0);
             position: relative;
         }
 
-        .menu::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(82, 183, 136, 0.1) 0%, transparent 20%),
-                        radial-gradient(circle at 90% 80%, rgba(45, 106, 79, 0.1) 0%, transparent 20%);
-            pointer-events: none;
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border: 2px solid var(--tea-green);
+            background: transparent;
+            color: var(--primary-green);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+            transform: translateY(-2px);
         }
 
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            position: relative;
-            z-index: 1;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .menu-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(27, 67, 50, 0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
-            border: 1px solid rgba(45, 106, 79, 0.1);
+            position: relative;
         }
 
         .menu-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(27, 67, 50, 0.15);
-            border-color: var(--leaf-bright);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
-        .menu-image {
-            height: 200px;
-            background: var(--gradient-leaf);
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--light-green), var(--gold));
+        }
+
+        .menu-icon {
+            height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
+            font-size: 3rem;
+            background: linear-gradient(135deg, rgba(74, 124, 41, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
         }
 
-        .menu-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(10px, 10px) rotate(180deg); }
-        }
+        .menu-icon.milk { color: #e8a87c; }
+        .menu-icon.tea { color: var(--light-green); }
+        .menu-icon.coffee { color: #6f4e37; }
 
         .menu-info {
-            padding: 1.5rem;
+            padding: 25px;
         }
 
         .menu-info h3 {
             font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--forest-dark);
-            font-family: 'Playfair Display', serif;
-        }
-
-        .menu-info p {
-            color: var(--forest-dark);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            opacity: 0.75;
-        }
-
-        .menu-footer {
+            color: var(--dark);
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--forest-primary);
-        }
-
-        .order-btn {
-            padding: 0.5rem 1.5rem;
-            background: var(--gradient-leaf);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .order-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(45, 106, 79, 0.3);
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 5%;
-            background: white;
-            position: relative;
-        }
-
-        .testimonials::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50 Q30 30 50 10 Q70 30 50 50' fill='%2340916c' fill-opacity='0.02'/%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .testimonial-card {
-            background: var(--cream-light);
-            padding: 2.5rem;
-            border-radius: 20px;
-            position: relative;
-            border: 1px solid rgba(45, 106, 79, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(27, 67, 50, 0.1);
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            font-family: 'Playfair Display', serif;
-            font-size: 8rem;
-            color: var(--leaf-bright);
-            opacity: 0.2;
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            line-height: 1;
-        }
-
-        .testimonial-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            color: var(--forest-dark);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            opacity: 0.85;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-leaf);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+            color: var(--primary-green);
             font-weight: 700;
             font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.2);
         }
 
-        .author-info h4 {
-            font-size: 1rem;
-            color: var(--forest-dark);
+        .menu-info p {
+            color: #777;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        .author-info p {
-            font-size: 0.85rem;
-            color: var(--forest-primary);
-        }
-
-        .stars {
-            color: var(--earth-light);
-            margin-bottom: 1rem;
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--tea-green);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 10px;
         }
 
         /* Contact Section */
         .contact {
-            padding: 100px 5%;
-            background: var(--gradient-forest);
+            padding: 100px 50px;
+            background: var(--primary-green);
             color: white;
             position: relative;
             overflow: hidden;
@@ -674,260 +513,212 @@
         .contact::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 40 Q20 20 40 0 Q60 20 40 40' fill='%2352B788' fill-opacity='0.05'/%3E%3C/svg%3E");
-            pointer-events: none;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
         }
 
-        .contact .section-subtitle {
-            color: var(--sage);
-        }
-
-        .contact .section-title {
-            color: white;
-        }
-
-        .contact .section-title::after {
-            background: var(--sage);
-        }
-
-        .contact-grid {
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-            position: relative;
-            z-index: 1;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
         .contact-item {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .contact-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: var(--sage);
-            border: 2px solid rgba(149, 213, 178, 0.3);
+            font-size: 1.5rem;
             transition: all 0.3s ease;
         }
 
         .contact-item:hover .contact-icon {
-            background: var(--sage);
-            color: var(--forest-dark);
-            transform: rotate(360deg);
+            background: var(--gold);
+            transform: scale(1.1);
         }
 
-        .contact-item h4 {
+        .contact-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            opacity: 0.8;
+        }
+
+        .contact-text p, .contact-text a {
             font-size: 1.2rem;
-            margin-bottom: 0.5rem;
             color: white;
+            text-decoration: none;
+            font-weight: 600;
         }
 
-        .contact-item p {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.8;
+        .map-container {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .map-placeholder p {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--tea-green);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 3rem;
-            position: relative;
-            z-index: 1;
+            gap: 20px;
+            margin: 30px 0;
         }
 
-        .social-link {
+        .social-links a {
             width: 50px;
             height: 50px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
             text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .social-link:hover {
-            background: var(--sage);
-            color: var(--forest-dark);
+        .social-links a:hover {
+            background: var(--light-green);
             transform: translateY(-5px);
-            border-color: var(--sage);
         }
 
-        /* Footer */
-        footer {
-            background: var(--forest-dark);
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            padding: 2rem 5%;
-            border-top: 1px solid rgba(82, 183, 136, 0.2);
-        }
-
-        footer p {
+        .copyright {
+            opacity: 0.6;
             font-size: 0.9rem;
-        }
-
-        footer i {
-            color: var(--leaf-bright);
-        }
-
-        /* Decorative Elements */
-        .leaf-decoration {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: var(--leaf-pale);
-            border-radius: 0 50% 0 50%;
-            opacity: 0.1;
-            pointer-events: none;
+            margin-top: 20px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: white;
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
-                box-shadow: 0 10px 30px rgba(27, 67, 50, 0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .tagline {
-                font-size: 1.1rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .leaf {
-                width: 30px;
-                height: 30px;
-            }
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--cream-light);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-leaf);
-            border-radius: 6px;
-            border: 3px solid var(--cream-light);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--forest-primary);
+            .hero h1 { font-size: 3rem; }
+            .tagline { font-size: 1.1rem; }
+            .about-container,
+            .contact-container { grid-template-columns: 1fr; gap: 40px; }
+            .nav-links { display: none; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .features { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Leaves -->
+    <div class="leaf" style="left: 10%; animation-duration: 15s; animation-delay: 0s;"></div>
+    <div class="leaf" style="left: 30%; animation-duration: 18s; animation-delay: 2s;"></div>
+    <div class="leaf" style="left: 50%; animation-duration: 12s; animation-delay: 4s;"></div>
+    <div class="leaf" style="left: 70%; animation-duration: 20s; animation-delay: 1s;"></div>
+    <div class="leaf" style="left: 90%; animation-duration: 16s; animation-delay: 3s;"></div>
+
     <!-- Navigation -->
     <nav id="navbar">
         <a href="#" class="logo">
-            <img src="WhatsApp Image 2026-03-31 at 17.15.07 (1).jpeg" alt="Kedai S'Ku Logo">
+            <i class="fas fa-leaf"></i>
+            S'Ku
         </a>
-        <ul class="nav-links" id="navLinks">
+        <ul class="nav-links">
             <li><a href="#home">Beranda</a></li>
             <li><a href="#about">Tentang</a></li>
             <li><a href="#menu">Menu</a></li>
-            <li><a href="#testimonials">Testimoni</a></li>
             <li><a href="#contact">Kontak</a></li>
         </ul>
-        <div class="mobile-menu" id="mobileMenu">
-            <i class="fas fa-bars"></i>
-        </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="leaves-container">
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-        </div>
         <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-seedling"></i> Selamat Datang
-            </div>
-            <h1>Kedai S'Ku</h1>
-            <p class="tagline">"Rasa Autentik, Kenangan di Setiap Suapan"</p>
-            <p class="hero-description">
-                Temukan kelezatan hidangan tradisional dengan sentuhan modern di tengah nuansa alam yang menyegarkan. 
-                Setiap resep dibuat dengan cinta dan bahan-bahan pilihan terbaik untuk pengalaman kuliner yang tak terlupakan.
+            <div class="hero-badge">✨ Premium Quality Since 2024</div>
+            <h1>S'Ku <span>Tea</span></h1>
+            <p class="tagline">
+                <span class="tagline-highlight">"Setiap Tegukan, Sebuah Kesegaran Alam"</span>
             </p>
-            <div class="hero-buttons">
+            <p style="font-size: 1.1rem; color: #555; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Nikmati harmoni sempurna antara daun teh pilihan dan susu segar dalam setiap cangkir. Pengalaman minum yang membawa kedamaian alam ke dalam hari Anda.
+            </p>
+            <div class="cta-buttons">
                 <a href="#menu" class="btn btn-primary">
-                    <i class="fas fa-utensils"></i> Lihat Menu
+                    <i class="fas fa-book-open"></i>
+                    Lihat Menu
                 </a>
                 <a href="#contact" class="btn btn-secondary">
-                    <i class="fas fa-map-marker-alt"></i> Kunjungi Kami
+                    <i class="fas fa-map-marker-alt"></i>
+                    Kunjungi Kami
                 </a>
             </div>
         </div>
@@ -935,65 +726,40 @@
 
     <!-- About Section -->
     <section class="about" id="about">
-        <div class="section-container">
-            <div class="section-header">
-                <p class="section-subtitle">
-                    <i class="fas fa-leaf"></i> Cerita Kami
-                </p>
-                <h2 class="section-title">Tentang Kedai S'Ku</h2>
-            </div>
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600" alt="Kedai S'Ku Interior">
+        <div class="about-container">
+            <div class="about-image">
+                <div class="about-image-main">
+                    <i class="fas fa-mug-hot"></i>
                 </div>
-                <div class="about-content">
-                    <h3>Warisan Rasa yang Terus Dijaga</h3>
-                    <p>
-                        Kedai S'Ku didirikan dengan passion untuk menghadirkan cita rasa autentik Nusantara 
-                        dalam suasana yang nyaman dan alami. Seperti dedaunan yang selalu hijau, kami percaya 
-                        bahwa makanan bukan sekadar kebutuhan, tetapi sebuah pengalaman yang menyentuh hati.
-                    </p>
-                    <p>
-                        Setiap hidangan kami disiapkan oleh chef berpengalaman dengan bahan-bahan segar 
-                        pilihan, memastikan setiap suapan memberikan kenikmatan yang konsisten dan menyehatkan.
-                    </p>
-                    <div class="features">
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-leaf"></i>
-                            </div>
-                            <div>
-                                <strong>Bahan Organik</strong>
-                                <p style="font-size: 0.85rem; margin: 0; color: var(--forest-primary);">Dipetik dari alam</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <div>
-                                <strong>Dibuat dengan Cinta</strong>
-                                <p style="font-size: 0.85rem; margin: 0; color: var(--forest-primary);">Resep tradisional</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-seedling"></i>
-                            </div>
-                            <div>
-                                <strong>Ramah Lingkungan</strong>
-                                <p style="font-size: 0.85rem; margin: 0; color: var(--forest-primary);">Packaging sustainable</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-smile"></i>
-                            </div>
-                            <div>
-                                <strong>Pelayanan Hangat</strong>
-                                <p style="font-size: 0.85rem; margin: 0; color: var(--forest-primary);">Seperti keluarga</p>
-                            </div>
-                        </div>
+                <div class="floating-card">
+                    <i class="fas fa-star"></i>
+                    <div>
+                        <h4>4.9/5</h4>
+                        <p>Rating Pelanggan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-content">
+                <h2>Kisah di Balik Setiap Cangkir</h2>
+                <p>S'Ku hadir dari passion kami terhadap teh berkualitas. Kami percaya bahwa minuman yang baik berasal dari bahan terbaik—daun teh segar yang dipetik dengan penuh perhatian dan susu segar yang creamy.</p>
+                <p>Setiap varian menu kami diracik dengan resep rahasia yang menyeimbangkan rasa autentik dan kesegaran modern. Dari Milk Series yang creamy hingga Tea Series yang menyegarkan, semua dibuat dengan cinta.</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <i class="fas fa-leaf"></i>
+                        <span>Bahan Alami & Segar</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Dibuat dengan Cinta</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-award"></i>
+                        <span>Kualitas Premium</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-smile"></i>
+                        <span>Pelayanan Ramah</span>
                     </div>
                 </div>
             </div>
@@ -1002,159 +768,134 @@
 
     <!-- Menu Section -->
     <section class="menu" id="menu">
-        <div class="section-container">
-            <div class="section-header">
-                <p class="section-subtitle">
-                    <i class="fas fa-leaf"></i> Hidangan Kami
-                </p>
-                <h2 class="section-title">Menu Favorit</h2>
-            </div>
-            <div class="menu-grid">
-                <div class="menu-card">
-                    <div class="menu-image">🍜</div>
-                    <div class="menu-info">
-                        <h3>Mie Goreng Spesial</h3>
-                        <p>Mie goreng dengan bumbu rahasia, telur, ayam, dan sayuran segar</p>
-                        <div class="menu-footer">
-                            <span class="price">Rp 25.000</span>
-                            <button class="order-btn">Pesan</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-card">
-                    <div class="menu-image">🍛</div>
-                    <div class="menu-info">
-                        <h3>Nasi Goreng Kampung</h3>
-                        <p>Nasi goreng tradisional dengan telur mata sapi dan kerupuk</p>
-                        <div class="menu-footer">
-                            <span class="price">Rp 22.000</span>
-                            <button class="order-btn">Pesan</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-card">
-                    <div class="menu-image">🍢</div>
-                    <div class="menu-info">
-                        <h3>Sate Ayam Madura</h3>
-                        <p>Sate ayam dengan bumbu kacang khas Madura yang gurih</p>
-                        <div class="menu-footer">
-                            <span class="price">Rp 30.000</span>
-                            <button class="order-btn">Pesan</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-card">
-                    <div class="menu-image">🍲</div>
-                    <div class="menu-info">
-                        <h3>Soto Ayam Lamongan</h3>
-                        <p>Soto ayam dengan kuah kuning gurih dan koya spesial</p>
-                        <div class="menu-footer">
-                            <span class="price">Rp 28.000</span>
-                            <button class="order-btn">Pesan</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-card">
-                    <div class="menu-image">🥤</div>
-                    <div class="menu-info">
-                        <h3>Es Teh Manis</h3>
-                        <p>Teh manis dingin dengan cita rasa segar</p>
-                        <div class="menu-footer">
-                            <span class="price">Rp 8.000</span>
-                            <button class="order-btn">Pesan</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-card">
-                    <div class="menu-image">🧋</div>
-                    <div class="menu-info">
-                        <h3>Es Kelapa Muda</h3>
-                        <p>Air kelapa muda segar dengan daging kelapa lembut</p>
-                        <div class="menu-footer">
-                            <span class="price">Rp 15.000</span>
-                            <button class="order-btn">Pesan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="section-header">
+            <h2>Menu Kami</h2>
+            <p>Pilihan minuman berkualitas dengan harga terjangkau. Dari yang creamy hingga yang menyegarkan, semua ada di sini!</p>
         </div>
-    </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="section-container">
-            <div class="section-header">
-                <p class="section-subtitle">
-                    <i class="fas fa-leaf"></i> Kata Mereka
-                </p>
-                <h2 class="section-title">Testimoni Pelanggan</h2>
+        <div class="menu-tabs">
+            <button class="tab-btn active" onclick="filterMenu('all')">Semua</button>
+            <button class="tab-btn" onclick="filterMenu('milk')">Milk Series</button>
+            <button class="tab-btn" onclick="filterMenu('tea')">Tea Series</button>
+            <button class="tab-btn" onclick="filterMenu('coffee')">Coffee Series</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid">
+            <!-- Milk Series -->
+            <div class="menu-card" data-category="milk">
+                <div class="menu-icon milk">
+                    <i class="fas fa-glass-whiskey"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Es Matcha Latte <span class="price">10K</span></h3>
+                    <p>Perpaduan sempurna antara bubuk matcha premium Jepang dengan susu segar yang creamy. Rasa autentik yang menenangkan.</p>
+                    <span class="badge">Best Seller</span>
+                </div>
             </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">
-                            "Rasa makanannya benar-benar autentik! Mengingatkan saya pada masakan ibu di kampung. 
-                            Suasana kedai yang hijau dan asri membuat makan terasa lebih nikmat."
-                        </p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">A</div>
-                            <div class="author-info">
-                                <h4>Andi Pratama</h4>
-                                <p>Pelanggan Setia</p>
-                            </div>
-                        </div>
-                    </div>
+
+            <div class="menu-card" data-category="milk">
+                <div class="menu-icon milk">
+                    <i class="fas fa-tint"></i>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">
-                            "Tempat favorit saya untuk makan siang. Harganya terjangkau, porsinya cukup, 
-                            dan yang paling penting rasanya selalu konsisten enak! Nuansa alamnya bikin relax."
-                        </p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">S</div>
-                            <div class="author-info">
-                                <h4>Siti Nurhaliza</h4>
-                                <p>Karyawan Swasta</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="menu-info">
+                    <h3>Es Susu Red Velvet <span class="price">10K</span></h3>
+                    <p>Susu segar dengan sentuhan rasa red velvet yang lembut dan sedikit coklat. Warna merah yang menggoda selera.</p>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p class="testimonial-text">
-                            "Sate Ayam Maduranya juara! Bumbu kacangnya kental dan gurih. 
-                            Ditambah suasana kedai yang hijau dan nyaman, pasti akan kembali lagi."
-                        </p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">B</div>
-                            <div class="author-info">
-                                <h4>Budi Santoso</h4>
-                                <p>Wiraswasta</p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+
+            <div class="menu-card" data-category="milk">
+                <div class="menu-icon milk">
+                    <i class="fas fa-candy-cane"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Es Susu Taro <span class="price">10K</span></h3>
+                    <p>Rasa khas umbi taro yang creamy dengan warna unik yang Instagramable. Favorit anak muda!</p>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="milk">
+                <div class="menu-icon milk">
+                    <i class="fas fa-cookie"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Es Susu Coklat <span class="price">10K</span></h3>
+                    <p>Coklat pilihan yang kaya rasa, dipadukan dengan susu segar. Pilihan klasik yang tak pernah salah.</p>
+                    <span class="badge">Favorit</span>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="milk">
+                <div class="menu-icon milk">
+                    <i class="fas fa-apple-alt"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Es Susu Strawberry <span class="price">10K</span></h3>
+                    <p>Rasa stroberi segar yang manis dan asam pas, menciptakan harmoni rasa yang menyegarkan.</p>
+                </div>
+            </div>
+
+            <!-- Tea Series -->
+            <div class="menu-card" data-category="tea">
+                <div class="menu-icon tea">
+                    <i class="fas fa-mug-hot"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Teh Original <span class="price">2.5K</span></h3>
+                    <p>Teh hitam klasik yang diseduh sempurna. Rasa autentik yang sederhana namun memuaskan.</p>
+                    <span class="badge">Harga Hemat</span>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="tea">
+                <div class="menu-icon tea">
+                    <i class="fas fa-lemon"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Lemon Tea <span class="price">5K</span></h3>
+                    <p>Kombinasi teh segar dengan perasan lemon asli. Pilihan sempurna untuk menyegarkan hari Anda.</p>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="tea">
+                <div class="menu-icon tea">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Teh Yakult <span class="price">6K</span></h3>
+                    <p>Inovasi unik! Perpaduan teh dan Yakult yang probiotik. Sehat dan menyegarkan sekaligus.</p>
+                    <span class="badge">Inovasi</span>
+                </div>
+            </div>
+
+            <!-- Coffee Series -->
+            <div class="menu-card" data-category="coffee">
+                <div class="menu-icon coffee">
+                    <i class="fas fa-coffee"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Americano Es <span class="price">8K</span></h3>
+                    <p>Kopi hitam murni dengan es yang menyegarkan. Untuk pecinta kopi sejati yang menghargai rasa asli.</p>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="coffee">
+                <div class="menu-icon coffee">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Kopi Es (Hitam) <span class="price">6K</span></h3>
+                    <p>Kopi lokal pilihan yang kuat dan kaya rasa. Sederhana, klasik, dan selalu memuaskan.</p>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="coffee">
+                <div class="menu-icon coffee">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div class="menu-info">
+                    <h3>Latte Vanilla Es <span class="price">10K</span></h3>
+                    <p>Espresso premium dengan susu steamed dan sentuhan vanilla yang manis. Creamy dan aromatik.</p>
+                    <span class="badge">Premium</span>
                 </div>
             </div>
         </div>
@@ -1162,48 +903,71 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <div class="section-container">
-            <div class="section-header">
-                <p class="section-subtitle">
-                    <i class="fas fa-leaf"></i> Hubungi Kami
-                </p>
-                <h2 class="section-title">Kunjungi Kedai S'Ku</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Kunjungi Kedai Kami</h2>
+                <p>Rasakan langsung pengalaman minum teh yang berbeda di S'Ku. Kami siap menyambut Anda dengan pelayanan terbaik dan minuman berkualitas.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/6283870841535" target="_blank">0838-7084-1535</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Alamat</h4>
+                            <p>Jl. Jeruk No. 48 Wage, Waru, Sidoarjo</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Jam Operasional</h4>
+                            <p>Setiap Hari: 09.00 - 21.00 WIB</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h4>Alamat</h4>
-                    <p>Jl. Raya Utama No. 123<br>Jakarta, Indonesia</p>
+            
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-store"></i>
+                    <p>S'Ku Tea - Waru, Sidoarjo</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Jl. Jeruk No. 48 Wage</p>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h4>Jam Operasional</h4>
-                    <p>Senin - Minggu<br>10:00 - 22:00 WIB</p>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <h4>Kontak</h4>
-                    <p>+62 812-3456-7890<br>hello@kedaisku.com</p>
-                </div>
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Kedai S'Ku. All Rights Reserved. | Dibuat dengan <i class="fas fa-leaf"></i> untuk pecinta kuliner</p>
+        <div class="footer-content">
+            <div class="footer-logo">S'Ku</div>
+            <p>"Setiap Tegukan, Sebuah Kesegaran Alam"</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/6283870841535"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            
+            <div class="copyright">
+                © 2024 S'Ku Tea. All rights reserved. | Made with <i class="fas fa-heart" style="color: var(--tea-green);"></i> in Sidoarjo
+            </div>
+        </div>
     </footer>
 
     <script>
@@ -1217,68 +981,54 @@
             }
         });
 
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobileMenu');
-        const navLinks = document.getElementById('navLinks');
-
-        mobileMenu.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
+        // Menu filter
+        function filterMenu(category) {
+            const cards = document.querySelectorAll('.menu-card');
+            const buttons = document.querySelectorAll('.tab-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.5s ease';
+                } else {
+                    card.style.display = 'none';
                 }
             });
-        });
+        }
 
-        // Order button interaction
-        document.querySelectorAll('.order-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const menuItem = this.closest('.menu-card').querySelector('h3').textContent;
-                alert(`Terima kasih! Anda tertarik dengan ${menuItem}. Silakan kunjungi kami atau hubungi WhatsApp untuk pemesanan.`);
-            });
-        });
-
-        // Animation on scroll
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: "0px 0px -50px 0px"
         };
 
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.menu-card, .testimonial-card, .feature, .contact-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
+        document.querySelectorAll('.menu-card, .feature-item').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "all 0.6s ease";
             observer.observe(el);
-        });
-
-        // Parallax effect for leaves
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const leaves = document.querySelectorAll('.leaf');
-            leaves.forEach((leaf, index) => {
-                const speed = 0.5 + (index * 0.1);
-                leaf.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
-            });
         });
     </script>
 </body>
